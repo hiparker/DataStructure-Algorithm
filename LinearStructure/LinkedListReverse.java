@@ -60,6 +60,7 @@ public class LinkedListReverse {
             return baseNode;
         }
 
+        // 跳过第一个，最后一个
         // 从第二个开始循环 忽略第一个
         LinkedNode currNode = baseNode.getNextNode();
         LinkedNode preNode = baseNode;
