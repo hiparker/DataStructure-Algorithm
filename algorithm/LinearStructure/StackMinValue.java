@@ -1,4 +1,4 @@
-package LinearStructure;
+package algorithm.LinearStructure;
 
 import java.util.Stack;
 
