@@ -69,13 +69,6 @@ public class MyArrayList<T> {
         return (T) array[index];
     }
 
-    /**
-     * 遍历元素
-     *
-     */
-    public void traverse(){
-    }
-
 
     /**
      * 比较元素
@@ -83,7 +76,11 @@ public class MyArrayList<T> {
      *
      * @return T
      */
-    public int locateElem(int e){
+    public int locateElem(T t){
+        if(null == t){
+            return 0;
+        }
+
 //        for (int j : array) {
 //            if (j == e) {
 //                return j;
@@ -96,9 +93,21 @@ public class MyArrayList<T> {
      * 求前驱元素
      * 返回第一个满足的数据的位序，不存在返回为 -1
      *
+     * 时间复杂度 O(n)
      * @return T
      */
-    public int priorElem(int i){
+    public int priorElem(T t){
+        for (int i = 0; i < array.length; i++) {
+            // 简化处理 直接比较物理地址
+            // 默认包装类 如 Integer 可以直接比较
+            if(array[i].equals(t)){
+                // 前方没有元素
+                if(i == 0){
+                    return -1;
+                }
+                return i-1;
+            }
+        }
         return -1;
     }
 
@@ -106,9 +115,21 @@ public class MyArrayList<T> {
      * 求后继元素
      * 返回第一个满足的数据的位序，不存在返回为 -1
      *
+     * 时间复杂度 O(n)
      * @return T
      */
-    public int nextElem(int i){
+    public int nextElem(T t){
+        for (int i = 0; i < array.length; i++) {
+            // 简化处理 直接比较物理地址
+            // 默认包装类 如 Integer 可以直接比较
+            if(array[i].equals(t)){
+                // 后方没有元素
+                if(i == length-1){
+                    return -1;
+                }
+                return i+1;
+            }
+        }
         return -1;
     }
 
@@ -142,6 +163,7 @@ public class MyArrayList<T> {
         //array = new T[DEFAULT_SIZE];
 
         // 考虑到 性能问题 空间换时间 保留原有槽位 减少扩容次数
+        // 批量GC回收对象
         Arrays.fill(array, true);
     }
 
@@ -152,6 +174,14 @@ public class MyArrayList<T> {
         array = null;
         length = EMPTY_LENGTH;
         currCapacity = DEFAULT_SIZE;
+    }
+
+    /**
+     * 获得迭代器 遍历元素专用
+     * @return Iterator
+     */
+    public MyIterator<T> getIterator(){
+        return new MyIterator<T>(this);
     }
 
     /**
@@ -178,6 +208,34 @@ public class MyArrayList<T> {
         currCapacity = newCapacity;
     }
 
+
+
+    /**
+     * 迭代器
+     * 不考虑删除问题
+     * @param <T>
+     */
+    public static class MyIterator<T> {
+
+        private final MyArrayList<T> myArrayList;
+        private int currCount;
+
+        public MyIterator(MyArrayList<T> myArrayList){
+            this.myArrayList = myArrayList;
+        }
+
+        public boolean haseNext(){
+            return currCount + 1 < myArrayList.length();
+        }
+
+        @SuppressWarnings("unchecked")
+        public T next(){
+            return (T) myArrayList.getElem(currCount++);
+        }
+
+    }
+
+
     public static void main(String[] args) {
 
         MyArrayList<Integer> arrayList = new MyArrayList<>();
@@ -190,9 +248,22 @@ public class MyArrayList<T> {
         // 删除 最后一个元素
         arrayList.delete(arrayList.length() - 1);
 
-        System.out.println(arrayList.getElem(47));
+        // 遍历元素
+        MyIterator<Integer> iterator = arrayList.getIterator();
+        while (iterator.haseNext()){
+            System.out.println(iterator.next());
+        }
 
+        // 求前驱后继
+        System.out.println("1的前驱 不出意外是没有的（无 = -1） 实际结果 -> " + arrayList.priorElem(1));
+        System.out.println("2的前驱位序是 0 实际结果 -> " + arrayList.priorElem(2));
+
+        System.out.println("50的后继位序是50 实际结果 -> " + arrayList.nextElem(50));
+        System.out.println("51的后继 不出意外是没有的（无 = -1） 实际结果 -> " + arrayList.nextElem(51));
 
     }
 
 }
+
+
+
