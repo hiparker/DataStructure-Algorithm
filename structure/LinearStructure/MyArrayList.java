@@ -1,6 +1,8 @@
 package structure.LinearStructure;
 
 
+import com.sun.tools.javac.util.Assert;
+
 import java.util.Arrays;
 
 /**
@@ -29,6 +31,8 @@ public class MyArrayList<T> {
 
     /**
      * 插入一个元素
+     *
+     * @param t 元素
      */
     public void insert(T t){
         // 校验是否需要自动扩容 阔多大
@@ -36,6 +40,32 @@ public class MyArrayList<T> {
 
         array[length++] = t;
     }
+
+    /**
+     * 插入一个元素
+     *
+     * @param t 元素
+     * @param index 位序
+     */
+    public void insert(T t, int index){
+        // 校验是否需要自动扩容 阔多大
+        ensureCapacityInternal();
+
+        Assert.check(index >= 0 && index <= length);
+
+        // 最后一个 直接调用尾节点插入
+        if(length == index){
+            insert(t);
+            return;
+        }
+
+        int copyLength = length++ - index;
+        System.arraycopy(array, index, array, index+1,
+                copyLength);
+
+        array[index] = t;
+    }
+
 
     /**
      * 删除一个元素
@@ -74,18 +104,22 @@ public class MyArrayList<T> {
      * 比较元素
      * 返回第一个满足的数据的位序，不存在返回为 -1
      *
-     * @return T
+     * (n+1)/2
+     * 时间复杂度 O(n)
+     * @return int
      */
     public int locateElem(T t){
         if(null == t){
             return 0;
         }
 
-//        for (int j : array) {
-//            if (j == e) {
-//                return j;
-//            }
-//        }
+        for (int i = 0; i < array.length; i++) {
+            // 简化处理 直接比较物理地址
+            // 默认包装类 如 Integer 可以直接比较
+            if(array[i].equals(t)){
+                return i;
+            }
+        }
         return -1;
     }
 
@@ -93,8 +127,9 @@ public class MyArrayList<T> {
      * 求前驱元素
      * 返回第一个满足的数据的位序，不存在返回为 -1
      *
+     * (n+1)/2
      * 时间复杂度 O(n)
-     * @return T
+     * @return int
      */
     public int priorElem(T t){
         for (int i = 0; i < array.length; i++) {
@@ -115,8 +150,9 @@ public class MyArrayList<T> {
      * 求后继元素
      * 返回第一个满足的数据的位序，不存在返回为 -1
      *
+     * (n+1)/2
      * 时间复杂度 O(n)
-     * @return T
+     * @return int
      */
     public int nextElem(T t){
         for (int i = 0; i < array.length; i++) {
@@ -225,7 +261,7 @@ public class MyArrayList<T> {
         }
 
         public boolean haseNext(){
-            return currCount + 1 < myArrayList.length();
+            return currCount <= myArrayList.length() - 1;
         }
 
         @SuppressWarnings("unchecked")
@@ -259,7 +295,8 @@ public class MyArrayList<T> {
         System.out.println("2的前驱位序是 0 实际结果 -> " + arrayList.priorElem(2));
 
         System.out.println("50的后继位序是50 实际结果 -> " + arrayList.nextElem(50));
-        System.out.println("51的后继 不出意外是没有的（无 = -1） 实际结果 -> " + arrayList.nextElem(51));
+        System.out.println("52的后继 不出意外是没有的（无 = -1） 实际结果 -> " + arrayList.nextElem(52));
+        System.out.println("求48的位序 实际结果 -> " + arrayList.locateElem(48));
 
     }
 
