@@ -71,7 +71,8 @@ public class MyArrayList<T> {
      * 删除一个元素
      * @param index 位序
      */
-    public void delete(int index){
+    public T delete(int index){
+        Object obj = array[index];
 
         // 假设有 3
         // 要删除第二位 则时 1
@@ -86,6 +87,7 @@ public class MyArrayList<T> {
 
         // GC 回收
         array[--length] = null;
+        return (T) obj;
     }
 
 
@@ -132,6 +134,10 @@ public class MyArrayList<T> {
      * @return int
      */
     public int priorElem(T t){
+        if(null == t){
+            return -1;
+        }
+
         for (int i = 0; i < array.length; i++) {
             // 简化处理 直接比较物理地址
             // 默认包装类 如 Integer 可以直接比较
@@ -155,6 +161,10 @@ public class MyArrayList<T> {
      * @return int
      */
     public int nextElem(T t){
+        if(null == t){
+            return -1;
+        }
+
         for (int i = 0; i < array.length; i++) {
             // 简化处理 直接比较物理地址
             // 默认包装类 如 Integer 可以直接比较
