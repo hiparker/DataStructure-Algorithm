@@ -340,6 +340,9 @@ public class MySingleLinkedList<T> {
 
     /**
      * 有序合并
+     *  时间复杂度 O(La.length + Lb.length)
+     *  空间复杂度 O(La.length + Lb.length)
+     *
      * @param a 表
      * @param b 表
      * @return c
