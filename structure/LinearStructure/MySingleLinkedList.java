@@ -35,8 +35,9 @@ public class MySingleLinkedList<T> {
      * 插入数据
      * @param t 数据
      */
-    public void insert(T t) {
+    public MySingleLinkedList<T> insert(T t) {
         linkTail(t);
+        return this;
     }
 
     /**
@@ -294,7 +295,7 @@ public class MySingleLinkedList<T> {
             this.currNode = mySingleLinkedList.head;
         }
 
-        public boolean haseNext(){
+        public boolean hasNext(){
             return null != currNode;
         }
 
@@ -337,6 +338,49 @@ public class MySingleLinkedList<T> {
         }
     }
 
+    /**
+     * 有序合并
+     * @param a 表
+     * @param b 表
+     * @return c
+     */
+    public static MySingleLinkedList<Integer> orderMergeList(
+            MySingleLinkedList<Integer> a, MySingleLinkedList<Integer> b){
+        MySingleLinkedList<Integer> c = new MySingleLinkedList<>();
+        if(null == a && null == b){
+            return c;
+        }
+
+        MySingleLinkedList.MyIterator<Integer> iteratorA =
+                a!=null?a.getIterator():new MySingleLinkedList.MyIterator<>(null);
+        MySingleLinkedList.MyIterator<Integer> iteratorB =
+                b!=null?b.getIterator():new MySingleLinkedList.MyIterator<>(null);
+
+        Integer currA = iteratorA.next();
+        Integer currB = iteratorB.next();
+        while ( currA != null || currB != null ){
+            if(currA == null){
+                c.insert(currB);
+                currB = iteratorB.next();
+                continue;
+            }
+
+            if(currB == null){
+                c.insert(currA);
+                currA = iteratorA.next();
+                continue;
+            }
+
+            if(currA > currB){
+                c.insert(currB);
+                currB = iteratorB.next();
+            }else {
+                c.insert(currA);
+                currA = iteratorA.next();
+            }
+        }
+        return c;
+    }
 
     public static void main(String[] args) {
 
@@ -352,7 +396,7 @@ public class MySingleLinkedList<T> {
 
         // 遍历元素
         MyIterator<Integer> iterator = singleLinkedList.getIterator();
-        while (iterator.haseNext()){
+        while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
 
@@ -364,6 +408,19 @@ public class MySingleLinkedList<T> {
         System.out.println("52的后继 不出意外是没有的（无 = -1） 实际结果 -> " + singleLinkedList.nextElem(52));
         System.out.println("求48的位序 实际结果 -> " + singleLinkedList.locateElem(48));
 
+        // 有序合并
+        MySingleLinkedList<Integer> aList = new MySingleLinkedList<>();
+        aList.insert(1).insert(2).insert(5).insert(7);
+
+        MySingleLinkedList<Integer> bList = new MySingleLinkedList<>();
+        bList.insert(3).insert(6).insert(7).insert(24);
+
+        MySingleLinkedList<Integer> cList = orderMergeList(aList, bList);
+        // 遍历元素
+        MySingleLinkedList.MyIterator<Integer> cIterator = cList.getIterator();
+        while (cIterator.hasNext()){
+            System.out.println(cIterator.next());
+        }
     }
 
 }

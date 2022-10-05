@@ -333,11 +333,11 @@ public class MyDoubleLinkedList<T> {
             this.priorCurrNode = mySingleLinkedList.tail;
         }
 
-        public boolean hasePrior(){
+        public boolean hasPrior(){
             return null != priorCurrNode;
         }
 
-        public boolean haseNext(){
+        public boolean hasNext(){
             return null != nextCurrNode;
         }
 
@@ -416,7 +416,7 @@ public class MyDoubleLinkedList<T> {
 
         // 正序 遍历元素
         MyIterator<Integer> iterator = singleLinkedList.getIterator();
-        while (iterator.haseNext()){
+        while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
 
@@ -424,7 +424,7 @@ public class MyDoubleLinkedList<T> {
 
         // 倒叙 遍历元素
         MyIterator<Integer> iterator2 = singleLinkedList.getIterator();
-        while (iterator2.hasePrior()){
+        while (iterator2.hasPrior()){
             System.out.println(iterator2.prior());
         }
 

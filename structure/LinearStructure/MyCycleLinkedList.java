@@ -4,6 +4,7 @@ package structure.LinearStructure;
 
 /**
  * 循环链表
+ * 特点在循环遍历定位对象
  *
  * @author 周鹏程
  * @date 2022-09-30 12:54 PM
@@ -30,8 +31,9 @@ public class MyCycleLinkedList<T> {
      * 插入数据
      * @param t 数据
      */
-    public void insert(T t) {
+    public MyCycleLinkedList<T> insert(T t) {
         linkTail(t);
+        return this;
     }
 
     /**
@@ -64,6 +66,7 @@ public class MyCycleLinkedList<T> {
         tail = myCycleLinkedList.tail;
         length+=myCycleLinkedList.length();
     }
+
 
 
     /**
@@ -286,7 +289,7 @@ public class MyCycleLinkedList<T> {
             this.head = null==myCycleLinkedList.tail?
                     null:myCycleLinkedList.tail.getNext();
         }
-        public boolean hashNext(){
+        public boolean hasNext(){
             // 获取头节点（循环链表 尾节点的next 为头节点）
             return head != null && currNode != head;
         }
@@ -361,6 +364,7 @@ public class MyCycleLinkedList<T> {
     }
 
 
+
     public static void main(String[] args) {
 
         MyCycleLinkedList<Integer> cycleLinkedList = new MyCycleLinkedList<>();
@@ -377,13 +381,27 @@ public class MyCycleLinkedList<T> {
 
         cycleLinkedList.mergeList(cycleLinkedList2);
 
-
         // 遍历元素
-        MyIterator<Integer> iterator = cycleLinkedList.getIterator();
-        while (iterator.hashNext()){
-            System.out.println(iterator.next());
+        MyIterator<Integer> iterator2 = cycleLinkedList.getIterator();
+        while (iterator2.hasNext()){
+            System.out.println(iterator2.next());
         }
 
+
+        int ret = 3;
+        // 故意浪费 10 step
+        MyIterator<Integer> iterator = cycleLinkedList.getIterator();
+        for (int i = 0; i < 10; i++) {
+            iterator.next();
+        }
+        // 循环链表 第二次循环 找到 value = 3
+        for(;;){
+            Integer next = iterator.next();
+            if(next.equals(ret)){
+                System.out.println("找到了 -> " + ret);
+                break;
+            }
+        }
     }
 
 }

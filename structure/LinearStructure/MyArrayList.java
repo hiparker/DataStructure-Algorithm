@@ -270,7 +270,7 @@ public class MyArrayList<T> {
             this.myArrayList = myArrayList;
         }
 
-        public boolean haseNext(){
+        public boolean hasNext(){
             return currCount <= myArrayList.length() - 1;
         }
 
@@ -296,7 +296,7 @@ public class MyArrayList<T> {
 
         // 遍历元素
         MyIterator<Integer> iterator = arrayList.getIterator();
-        while (iterator.haseNext()){
+        while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
 
