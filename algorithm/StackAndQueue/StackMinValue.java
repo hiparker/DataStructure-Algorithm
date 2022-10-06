@@ -1,4 +1,4 @@
-package algorithm.LinearStructure;
+package algorithm.StackAndQueue;
 
 import java.util.Stack;
 
