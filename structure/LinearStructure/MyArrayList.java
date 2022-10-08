@@ -34,11 +34,12 @@ public class MyArrayList<T> {
      *
      * @param t 元素
      */
-    public void insert(T t){
+    public MyArrayList<T> insert(T t){
         // 校验是否需要自动扩容 阔多大
         ensureCapacityInternal();
 
         array[length++] = t;
+        return this;
     }
 
     /**
@@ -282,6 +283,53 @@ public class MyArrayList<T> {
     }
 
 
+    /**
+     * 有序合并
+     *  时间复杂度 O(La.length + Lb.length)
+     *  空间复杂度 O(La.length + Lb.length)
+     *
+     * @param a 表
+     * @param b 表
+     * @return c
+     */
+    public static MyArrayList<Integer> orderMergeList(
+            MyArrayList<Integer> a, MyArrayList<Integer> b){
+        MyArrayList<Integer> c = new MyArrayList<>();
+        if(null == a && null == b){
+            return c;
+        }
+
+        MyArrayList.MyIterator<Integer> iteratorA =
+                a!=null?a.getIterator():new MyArrayList.MyIterator<>(null);
+        MyArrayList.MyIterator<Integer> iteratorB =
+                b!=null?b.getIterator():new MyArrayList.MyIterator<>(null);
+
+        Integer currA = iteratorA.next();
+        Integer currB = iteratorB.next();
+        while ( currA != null || currB != null ){
+            if(currA == null){
+                c.insert(currB);
+                currB = iteratorB.next();
+                continue;
+            }
+
+            if(currB == null){
+                c.insert(currA);
+                currA = iteratorA.next();
+                continue;
+            }
+
+            if(currA > currB){
+                c.insert(currB);
+                currB = iteratorB.next();
+            }else {
+                c.insert(currA);
+                currA = iteratorA.next();
+            }
+        }
+        return c;
+    }
+
     public static void main(String[] args) {
 
         MyArrayList<Integer> arrayList = new MyArrayList<>();
@@ -308,6 +356,20 @@ public class MyArrayList<T> {
         System.out.println("52的后继 不出意外是没有的（无 = -1） 实际结果 -> " + arrayList.nextElem(52));
         System.out.println("求48的位序 实际结果 -> " + arrayList.locateElem(48));
 
+
+        // 有序合并
+        MyArrayList<Integer> aList = new MyArrayList<>();
+        aList.insert(1).insert(2).insert(5).insert(7);
+
+        MyArrayList<Integer> bList = new MyArrayList<>();
+        bList.insert(3).insert(6).insert(7).insert(24);
+
+        MyArrayList<Integer> cList = orderMergeList(aList, bList);
+        // 遍历元素
+        MyArrayList.MyIterator<Integer> cIterator = cList.getIterator();
+        while (cIterator.hasNext()){
+            System.out.println(cIterator.next());
+        }
     }
 
 }
