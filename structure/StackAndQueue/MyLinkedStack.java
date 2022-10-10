@@ -86,7 +86,7 @@ public class MyLinkedStack<T> implements MyStack<T>{
      */
     @Override
     public boolean isEmpty() {
-        return null != tail;
+        return null == tail;
     }
 
     /**

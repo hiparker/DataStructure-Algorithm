@@ -86,7 +86,7 @@ public class MyLinkedQueue<T> implements MyQueue<T>{
      */
     @Override
     public boolean isEmpty() {
-        return null != head;
+        return null == head;
     }
 
     /**
