@@ -21,6 +21,11 @@ public class StackToQueue {
         }
     }
 
+    /**
+     * 核心：三角置换
+     * s1 ▲ 转换到  s2 ▼
+     * @param <T>
+     */
     public static class MyStackQueue<T> implements MyQueue<T> {
 
         // 双栈

@@ -20,6 +20,14 @@ public class QueueToStack {
         }
     }
 
+    /**
+     * 核心：队列转栈 是保留q1的最后一个节点
+     *      然后交换数据
+     *      q1 = 剩余数据
+     *      q2 = q1 的最后一个节点数据
+     *
+     * @param <T>
+     */
     public static class MyQueueStack<T> implements MyStack<T> {
 
         // 双栈
