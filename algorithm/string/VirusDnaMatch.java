@@ -37,7 +37,7 @@ public class VirusDnaMatch {
 
         for (int i = 0; i < virusLen; i++) {
             List<String> virusArray = new ArrayList<>();
-            for (int j = i; j < i+3; j++) {
+            for (int j = i; j < i+virusLen; j++) {
                 virusArray.add(String.valueOf(virusCir.charAt(j)));
             }
 
