@@ -10,10 +10,10 @@ import java.util.Stack;
  * @author 周鹏程
  * @date 2022-10-31 7:33 PM
  **/
-public class BinaryTreeStack {
+public class BinaryTreeByStack {
 
     public static void main(String[] args) {
-        BinaryTreeStack bt = new BinaryTreeStack();
+        BinaryTreeByStack bt = new BinaryTreeByStack();
 
         //        2
         //   1          5
@@ -127,7 +127,7 @@ public class BinaryTreeStack {
     }
 
 
-    public BinaryTreeStack push(int data){
+    public BinaryTreeByStack push(int data){
         LeafNode leafNode = new LeafNode();
         leafNode.setData(data);
 
