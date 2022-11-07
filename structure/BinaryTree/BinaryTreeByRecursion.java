@@ -2,29 +2,38 @@ package structure.BinaryTree;
 
 /**
  * 二叉树 - 三叉链表
- *
- *
+ * 递归实现
  *
  * @author 周鹏程
  * @date 2022-10-31 7:33 PM
  **/
-public class BinaryTree {
+public class BinaryTreeByRecursion {
 
     public static void main(String[] args) {
-        BinaryTree bt = new BinaryTree();
+        BinaryTreeByRecursion bt = new BinaryTreeByRecursion();
 
+
+        //        2
+        //   1          5
+        //          3        7
+        //                        8
+        //                            66
+        //                        41
 
         bt.push(2).push(5).push(1).push(7);
         bt.push(8).push(3).push(66).push(41);
 
         System.out.println("先序遍历");
-        bt.preOrder();
+        // 2 1 5 3 7 8 66 41
+        bt.preOrder(bt.head);
 
         System.out.println("中序遍历");
-        bt.middleOrder();
+        // 1 2 3 5 7 8 41 66
+        bt.middleOrder(bt.head);
 
         System.out.println("后序遍历");
-        bt.postOrder();
+        // 1 3 41 66 8 7 5 2
+        bt.postOrder(bt.head);
 
 
     }
@@ -33,17 +42,11 @@ public class BinaryTree {
     private LeafNode head;
 
 
-    public BinaryTree(){
-
-    }
-
-    public void preOrder(){
-        preOrderInner(head);
-    }
-
-
-
-    private void preOrderInner(LeafNode node){
+    /**
+     * 先序遍历
+     * @param node 根结点
+     */
+    private void preOrder(LeafNode node){
         if(null == node){
             return;
         }
@@ -52,53 +55,52 @@ public class BinaryTree {
         System.out.println(data);
 
         if(null != node.getlChild()){
-            preOrderInner(node.getlChild());
+            preOrder(node.getlChild());
         }
 
         if(null != node.getrChild()){
-            preOrderInner(node.getrChild());
+            preOrder(node.getrChild());
         }
     }
 
 
-    public void middleOrder(){
-        middleOrderInner(head);
-    }
-
-    private void middleOrderInner(LeafNode node){
+    /**
+     * 中序遍历
+     * @param node 根结点
+     */
+    private void middleOrder(LeafNode node){
         if(null == node){
             return;
         }
 
 
         if(null != node.getlChild()){
-            preOrderInner(node.getlChild());
+            middleOrder(node.getlChild());
         }
 
         Integer data = node.getData();
         System.out.println(data);
 
         if(null != node.getrChild()){
-            preOrderInner(node.getrChild());
+            middleOrder(node.getrChild());
         }
     }
 
-
-    public void postOrder(){
-        postOrderInner(head);
-    }
-
-    private void postOrderInner(LeafNode node){
+    /**
+     * 后序遍历
+     * @param node 根结点
+     */
+    private void postOrder(LeafNode node){
         if(null == node){
             return;
         }
 
         if(null != node.getlChild()){
-            preOrderInner(node.getlChild());
+            postOrder(node.getlChild());
         }
 
         if(null != node.getrChild()){
-            preOrderInner(node.getrChild());
+            postOrder(node.getrChild());
         }
 
         Integer data = node.getData();
@@ -106,7 +108,7 @@ public class BinaryTree {
     }
 
 
-    public BinaryTree push(int data){
+    public BinaryTreeByRecursion push(int data){
         LeafNode leafNode = new LeafNode();
         leafNode.setData(data);
 
