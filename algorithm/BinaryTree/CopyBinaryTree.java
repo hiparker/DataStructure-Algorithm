@@ -1,19 +1,17 @@
-package structure.BinaryTree;
-
+package algorithm.BinaryTree;
 
 import java.util.Stack;
 
 /**
- * 二叉树 - 三叉链表
- * 栈实现
+ * 拷贝二叉树
  *
  * @author 周鹏程
- * @date 2022-10-31 7:33 PM
+ * @date 2022-11-08 3:14 PM
  **/
-public class BinaryTreeByStack {
+public class CopyBinaryTree {
 
     public static void main(String[] args) {
-        BinaryTreeByStack bt = new BinaryTreeByStack();
+        CopyBinaryTree bt = new CopyBinaryTree();
 
         //        2
         //   1          5
@@ -27,18 +25,12 @@ public class BinaryTreeByStack {
 
         System.out.println("先序遍历");
         // 2 1 5 3 7 8 66 41
-        bt.preOrder(bt.head);
+        preOrder(bt.getHead());
 
-        System.out.println("中序遍历");
-        // 1 2 3 5 7 8 41 66
-        bt.middleOrder(bt.head);
-
-        System.out.println("后序遍历");
-        // 1 3 41 66 8 7 5 2
-        bt.postOrder(bt.head);
-
+        System.out.println("拷贝二叉树 - 先序遍历");
+        CopyBinaryTree copyBinaryTree = copy(bt.getHead());
+        preOrder(copyBinaryTree.getHead());
     }
-
 
     private LeafNode head;
 
@@ -47,7 +39,65 @@ public class BinaryTreeByStack {
      * 先序遍历
      * @param node 根结点
      */
-    public void preOrder(LeafNode node){
+    public static CopyBinaryTree copy(LeafNode node){
+        CopyBinaryTree copyBt = new CopyBinaryTree();
+        if(null == node){
+            return copyBt;
+        }
+
+        if(null == copyBt.head){
+            copyBt.head = new LeafNode();
+        }
+
+        LeafNode curr = copyBt.head;
+
+        curr.setData(node.getData());
+
+        LeafNode prev = node;
+
+        Stack<LeafNode> stack = new Stack<>();
+        stack.push(prev);
+
+        while (!stack.isEmpty()){
+            LeafNode pop = stack.pop();
+            // 先放入右节点 这样针对栈特性 先进后出 等下一次循环来了会优先处理左节点
+            if(null != pop.getrChild()){
+                stack.push(pop.getrChild());
+            }
+
+            if(null != pop.getlChild()){
+                stack.push(pop.getlChild());
+            }
+
+            // 跳过根节点
+            if(pop == node){
+                continue;
+            }
+
+            LeafNode tmp = new LeafNode();
+            tmp.setData(pop.getData());
+
+            // 如果当前是 左节点
+            if(pop == prev.getlChild()){
+                curr.setlChild(tmp);
+            }
+            // 否则是 右节点
+            else {
+                curr.setrChild(tmp);
+            }
+
+            prev = pop;
+            curr = tmp;
+        }
+        return copyBt;
+    }
+
+
+    /**
+     * 先序遍历
+     * @param node 根结点
+     */
+    public static void preOrder(LeafNode node){
         if(null == node){
             return;
         }
@@ -70,64 +120,9 @@ public class BinaryTreeByStack {
     }
 
 
-    /**
-     * 中序遍历
-     * @param node 根结点
-     */
-    public void middleOrder(LeafNode node){
-        if(null == node){
-            return;
-        }
 
 
-        LeafNode p = node;
-        Stack<LeafNode> stack = new Stack<>();
-        while (null != p || !stack.isEmpty()){
-            if(null != p){
-                stack.push(p);
-                p = p.getlChild();
-            }else {
-                LeafNode pop = stack.pop();
-                System.out.println(pop.getData());
-                p = pop.getrChild();
-            }
-        }
-    }
-
-    /**
-     * 后序遍历
-     * @param node 根结点
-     */
-    public void postOrder(LeafNode node){
-        if(null == node){
-            return;
-        }
-
-        LeafNode prev = null;
-        LeafNode p = node;
-        Stack<LeafNode> stack = new Stack<>();
-        while (null != p || !stack.isEmpty()){
-            // 循环到 左子树底
-            while (null != p){
-                stack.push(p);
-                p = p.getlChild();
-            }
-
-            LeafNode top = stack.peek();
-            // 如果当前节点没有右节点 则默认当前节点 已经为底节点
-            // 如果当前节点的右节点 等于上一次出栈节点 则认为当前节点认为已经遍历完毕 直接出栈
-            if(null == top.getrChild() || top.getrChild() == prev){
-                LeafNode pop = stack.pop();
-                System.out.println(pop.getData());
-                prev = top;
-            }else {
-                p = top.getrChild();
-            }
-        }
-    }
-
-
-    public BinaryTreeByStack push(int data){
+    public CopyBinaryTree push(int data){
         LeafNode leafNode = new LeafNode();
         leafNode.setData(data);
 
@@ -212,3 +207,4 @@ public class BinaryTreeByStack {
     }
 
 }
+

@@ -46,7 +46,7 @@ public class BinaryTreeByRecursion {
      * 先序遍历
      * @param node 根结点
      */
-    private void preOrder(LeafNode node){
+    public void preOrder(LeafNode node){
         if(null == node){
             return;
         }
@@ -68,7 +68,7 @@ public class BinaryTreeByRecursion {
      * 中序遍历
      * @param node 根结点
      */
-    private void middleOrder(LeafNode node){
+    public void middleOrder(LeafNode node){
         if(null == node){
             return;
         }
@@ -90,7 +90,7 @@ public class BinaryTreeByRecursion {
      * 后序遍历
      * @param node 根结点
      */
-    private void postOrder(LeafNode node){
+    public void postOrder(LeafNode node){
         if(null == node){
             return;
         }
@@ -140,7 +140,9 @@ public class BinaryTreeByRecursion {
         return this;
     }
 
-
+    public LeafNode getHead() {
+        return head;
+    }
 
     /**
      * 二叉树叶子节点

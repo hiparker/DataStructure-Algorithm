@@ -1,20 +1,17 @@
-package structure.BinaryTree;
-
-
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
+package algorithm.BinaryTree;
 
 /**
  * 二叉树 - 三叉链表
- * 分层遍历 队列实现
+ * 获取二叉树的叶子节点数
  *
  * @author 周鹏程
  * @date 2022-10-31 7:33 PM
  **/
-public class BinaryTreeByQueue {
+public class GetLeafCountByBinaryTree {
 
     public static void main(String[] args) {
-        BinaryTreeByQueue bt = new BinaryTreeByQueue();
+        GetLeafCountByBinaryTree bt = new GetLeafCountByBinaryTree();
+
 
         //        2
         //   1          5
@@ -26,10 +23,8 @@ public class BinaryTreeByQueue {
         bt.push(2).push(5).push(1).push(7);
         bt.push(8).push(3).push(66).push(41);
 
-        System.out.println("分层遍历");
-        // 2 1 5 3 7 8 66 41
-        bt.levelOrder(bt.head);
-
+        int depth = bt.getLeafCount();
+        System.out.println("输出二叉树 叶子节点数 -> "+depth);
 
     }
 
@@ -37,33 +32,30 @@ public class BinaryTreeByQueue {
     private LeafNode head;
 
 
-    /**
-     * 分层遍历
-     * @param node 根结点
-     */
-    public void levelOrder(LeafNode node){
+    public int getLeafCount(){
+        if(null == head){
+            return 0;
+        }
+
+        return getleafCountInner(head);
+    }
+    private int getleafCountInner(LeafNode node){
         if(null == node){
-            return;
+            return 0;
         }
 
-        Queue<LeafNode> queue = new LinkedBlockingQueue<>();
-        queue.add(node);
-        while (!queue.isEmpty()){
-            LeafNode poll = queue.poll();
-            System.out.println(poll.getData());
-
-            if(null != poll.getlChild()){
-                queue.add(poll.getlChild());
-            }
-
-            if(null != poll.getrChild()){
-                queue.add(poll.getrChild());
-            }
+        // 叶子节点
+        if(null == node.getlChild() &&
+            null == node.getrChild()){
+            return 1;
         }
+
+        return getleafCountInner(node.getlChild()) + getleafCountInner(node.getrChild());
     }
 
 
-    public BinaryTreeByQueue push(int data){
+
+    public GetLeafCountByBinaryTree push(int data){
         LeafNode leafNode = new LeafNode();
         leafNode.setData(data);
 
@@ -94,7 +86,6 @@ public class BinaryTreeByQueue {
         }
         return this;
     }
-
 
     public LeafNode getHead() {
         return head;
