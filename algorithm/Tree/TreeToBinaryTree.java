@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 树转二叉树
+ * 树 转 二叉树
  * 分层遍历
  *
  *
