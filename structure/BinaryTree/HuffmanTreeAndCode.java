@@ -28,7 +28,6 @@ public class HuffmanTreeAndCode {
 
     /**
      * 创建哈夫曼树
-     * @return Map<Character, Integer>
      */
     public synchronized void init(String text){
         if(huffmanTreeStructure != null){
@@ -367,8 +366,7 @@ public class HuffmanTreeAndCode {
 
 
     public static void main(String[] args) {
-        String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad";
-        // 000111110
+        String text = "askjjhgfiqhkhjkbxzasdkgjhgsjasjdhdghgasdasdas";
 
         HuffmanTreeAndCode huffmanTreeAndCode = new HuffmanTreeAndCode();
         // 初始化哈夫曼树
