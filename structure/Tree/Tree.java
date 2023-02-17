@@ -10,7 +10,18 @@ public interface Tree {
 
     /**
      * 遍历树
+     *
+     * @param head 头节点
+     */
+    void init(ILeafNode head);
+
+    /**
+     * 遍历树
      */
     void traversal();
+
+    interface ILeafNode{
+
+    }
 
 }

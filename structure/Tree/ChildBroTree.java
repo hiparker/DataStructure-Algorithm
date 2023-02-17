@@ -20,7 +20,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  **/
 public class ChildBroTree implements Tree{
 
-    private LeafNode head;
+    private ILeafNode head;
 
     public static void main(String[] args) {
         /*
@@ -34,43 +34,46 @@ public class ChildBroTree implements Tree{
         ChildBroTree arrayTree = new ChildBroTree();
 
         LeafNode head = new LeafNode();
-        head.setData(1);
+        head.setData("1");
 
 
 
         LeafNode a1 = new LeafNode();
-        a1.setData(11);
+        a1.setData("11");
         head.setFirstChild(a1);
 
 
         LeafNode a2 = new LeafNode();
-        a2.setData(12);
+        a2.setData("12");
         a1.setNextBro(a2);
 
         LeafNode a3 = new LeafNode();
-        a3.setData(13);
+        a3.setData("13");
         a2.setNextBro(a3);
 
         LeafNode a2a = new LeafNode();
-        a2a.setData(121);
+        a2a.setData("121");
         a2.setFirstChild(a2a);
 
 
         LeafNode a2b = new LeafNode();
-        a2b.setData(122);
+        a2b.setData("122");
         a2a.setNextBro(a2b);
 
 
         LeafNode a2a1 = new LeafNode();
-        a2a1.setData(1211);
+        a2a1.setData("1211");
         a2a.setFirstChild(a2a1);
 
 
-        arrayTree.head = head;
-
-
+        arrayTree.init(head);
         // 遍历树
         arrayTree.traversal();
+    }
+
+    @Override
+    public void init(ILeafNode iLeafNode) {
+        this.head = iLeafNode;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class ChildBroTree implements Tree{
         }
 
         Queue<LeafNode> leafNodes = new LinkedBlockingQueue<>();
-        leafNodes.add(head);
+        leafNodes.add((LeafNode) head);
 
         while (!leafNodes.isEmpty()){
             LeafNode poll = leafNodes.poll();
@@ -100,19 +103,19 @@ public class ChildBroTree implements Tree{
      *
      * Integer
      */
-    public static class LeafNode{
+    public static class LeafNode implements ILeafNode{
 
-        private Integer data;
+        private String data;
 
         private LeafNode firstChild;
 
         private LeafNode nextBro;
 
-        public Integer getData() {
+        public String getData() {
             return data;
         }
 
-        public void setData(Integer data) {
+        public void setData(String data) {
             this.data = data;
         }
 
