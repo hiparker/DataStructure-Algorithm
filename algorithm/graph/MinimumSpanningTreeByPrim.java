@@ -253,12 +253,12 @@ public class MinimumSpanningTreeByPrim {
             }
 
             // 乱序排列
-//            for (int i = diGraph.getPointLength() - 1; i >= 0; i--) {
-//                int index = (int) (Math.random()*i);
-//                String temp = diGraph.getPointArray()[index];
-//                diGraph.getPointArray()[index] =  diGraph.getPointArray()[i];
-//                diGraph.getPointArray()[i] = temp;
-//            }
+            for (int i = diGraph.getPointLength() - 1; i >= 0; i--) {
+                int index = (int) (Math.random()*i);
+                String temp = diGraph.getPointArray()[index];
+                diGraph.getPointArray()[index] =  diGraph.getPointArray()[i];
+                diGraph.getPointArray()[i] = temp;
+            }
 
             // 指定边
             for (int i = 0; i < randomCount; i++) {
