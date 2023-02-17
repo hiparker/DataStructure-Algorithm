@@ -240,7 +240,7 @@ public class MinimumSpanningTreeByPrim {
             DiGraph diGraph = new DiGraph();
 
             Random random = new Random();
-            int randomCount = random.nextInt(6);
+            int randomCount = random.nextInt(10);
 
             diGraph.pointArray = new String[randomCount];
             diGraph.graphArray = new int[randomCount][randomCount];
