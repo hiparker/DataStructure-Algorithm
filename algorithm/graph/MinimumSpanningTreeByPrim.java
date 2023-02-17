@@ -60,9 +60,6 @@ public class MinimumSpanningTreeByPrim {
             minimumSpanningTree.traversal();
         }
         System.out.println();
-
-
-
     }
 
     /**
