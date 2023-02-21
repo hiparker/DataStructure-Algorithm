@@ -14,7 +14,6 @@ public class ShortestPathByDijkstra {
     private static final int DEF_STEP = 0;
 
     public static void main(String[] args) {
-
         DiGraph diGraph = DiGraph.createRandomDiGraph();
 
         System.out.println("图顶点数：" + diGraph.getPointLength());
@@ -73,7 +72,6 @@ public class ShortestPathByDijkstra {
             if(graphArray[startIndex][i] == DEF_STEP){
                 continue;
             }
-
             // 初始化头步长
             pathCountArray[startIndex][i] = graphArray[startIndex][i];
             // 初始化头路径
@@ -86,12 +84,16 @@ public class ShortestPathByDijkstra {
             for (int k = 0; k < pathCountArray[i].length; k++) {
                 // 上一次本身就没有匹配到的节点 直接退出
                 if(pathCountArray[i][k] == DEF_STEP){
-                    pathCountArray[i+1][k] = DEF_STEP;
                     continue;
                 }
 
                 // 如果原始节点 小于 或者 等于未初始化状态 则继承上一次步长
-                if(pathCountArray[i][k] <= pathCountArray[i+1][k] || DEF_STEP == pathCountArray[i+1][k]){
+                // 继承的条件为 同时也防止后位有值后 被当前0覆盖
+                // 当前值 <= 后位值 且 当前值不等于0
+                // 后位值为空
+                boolean flag = (pathCountArray[i][k] <= pathCountArray[i+1][k] && pathCountArray[i][k] != DEF_STEP)
+                                || DEF_STEP == pathCountArray[i+1][k];
+                if(flag){
                     pathCountArray[i+1][k] = pathCountArray[i][k];
                     pathArray[i+1][k] = pathArray[i][k];
                 }
@@ -122,9 +124,12 @@ public class ShortestPathByDijkstra {
             return null;
         }
 
+        String pathStr = pathArray[pathArray.length - 1][endIndex];
+        String substring = pathStr.substring(0, pathStr.length() - 3);
         Path path = new Path();
         path.setLength(length);
-        path.setPath(pathArray[pathArray.length-1][endIndex]);
+        path.setPath(substring);
+
         return path;
     }
 
@@ -229,12 +234,11 @@ public class ShortestPathByDijkstra {
 
                     int sideFlag =
                             i==k
-                            ? 0
-                            : random.nextInt(5);
+                                    ? 0
+                                    : random.nextInt(10);
                     diGraph.getGraphArray()[i][k] = sideFlag;
                 }
             }
-
             return diGraph;
         }
 
