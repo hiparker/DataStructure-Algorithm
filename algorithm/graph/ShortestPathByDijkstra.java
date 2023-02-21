@@ -42,7 +42,7 @@ public class ShortestPathByDijkstra {
 
     /**
      * 获取最短路径
-     * 时间复杂度 O(n2)
+     * 时间复杂度 O(n3)
      *
      * @param startIndex 起始点
      * @param endIndex 终点
