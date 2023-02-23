@@ -1,7 +1,7 @@
 package algorithm.search.LineTable;
 
 /**
- * 二分查找
+ * 线性表 二分查找
  *
  * @author 周鹏程
  * @date 2023-02-23 10:23 AM

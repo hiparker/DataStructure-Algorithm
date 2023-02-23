@@ -2,7 +2,7 @@ package algorithm.search.LineTable;
 
 
 /**
- * 哨兵查找 （非线程安全）
+ * 线性表 哨兵查找 （非线程安全）
  *
  * @author 周鹏程
  * @date 2023-02-22 6:53 PM
