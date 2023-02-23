@@ -1,4 +1,4 @@
-package algorithm.search;
+package algorithm.search.LineTable;
 
 /**
  * 二分查找
