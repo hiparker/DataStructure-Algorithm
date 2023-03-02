@@ -18,7 +18,16 @@ public class DirectInsertionSort extends AbstractSortBase{
         insertionSort.check(randomArray);
     }
 
-
+    /**
+     * 快速排序
+     *
+     * 稳定排序
+     * 时间复杂度 最快O(n) 平均O(n2) 最慢O(n2)
+     * 辅助空间复杂度 O(1)
+     *
+     * @param array
+     * @return
+     */
     @Override
     public int[] sort(int[] array) {
         // 从第二位开始 向前以此匹配

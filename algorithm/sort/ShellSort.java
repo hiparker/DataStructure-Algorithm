@@ -23,6 +23,10 @@ public class ShellSort extends AbstractSortBase{
      * 希尔插入排序 优于直接插入排序
      * 主要是分了多段进行排序，最后采用直接插入排序扫尾
      *
+     * 不稳定排序
+     * 时间复杂度 最快O(n) 平均O(n1.3) 最慢O(n2)
+     * 辅助空间复杂度 O(1)
+     *
      * @param array
      * @return
      */
