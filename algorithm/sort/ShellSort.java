@@ -28,7 +28,10 @@ public class ShellSort extends AbstractSortBase{
      */
     @Override
     public int[] sort(int[] array) {
+        // 为了保证 排序间隔递减 最后按照间隔为1重排
         for (int h = array.length/2; h > 0; h /= 2) {
+            // 本质上还是 插入排序的优化版本
+            // 初始版本 插入排序是挨着牌的跑，交换对应的位置
             for (int i = h; i < array.length; i++) {
                 for(int j = i-h; j >= 0 && array[j] > array[j+h]; j--){
                     swap(array, j, j+h);
