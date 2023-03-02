@@ -91,6 +91,9 @@ public abstract class AbstractSortBase {
             }
 
         }
+
+
+        System.out.println("是否正确: " + (flag?"正确":"错误"));
         return flag;
     }
 
