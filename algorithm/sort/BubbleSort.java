@@ -21,6 +21,7 @@ public class BubbleSort extends AbstractSortBase{
 
     /**
      * 冒泡排序
+     * O(n2)
      *
      * @param array
      * @return
