@@ -22,7 +22,7 @@ public class HeapSort extends AbstractSortBase{
      * 选择排序 - 堆排序 - 原地排序
      *
      * 不稳定排序
-     * 时间复杂度
+     * 时间复杂度 O(nlogn)
      * 辅助空间复杂度
      *
      * @param array
