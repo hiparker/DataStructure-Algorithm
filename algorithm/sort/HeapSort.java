@@ -14,7 +14,7 @@ public class HeapSort extends AbstractSortBase{
         HeapSort heapSort = new HeapSort();
 
         // 执行排序 对数
-        heapSort.sort(randomArray);
+        heapSort.check(randomArray);
     }
 
 
