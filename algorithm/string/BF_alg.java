@@ -38,7 +38,7 @@ public final class BF_alg {
     }
 
     public static void main(String[] args) {
-        char[] a = {'a','a','b','c','a','c','c'};
+        char[] a = {'a','c','b','c','a','c','c'};
         char[] b = {'a','c','c'};
         System.out.println(match(a, b));
     }
