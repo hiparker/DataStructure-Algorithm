@@ -37,6 +37,11 @@ public class ShellSort extends AbstractSortBase{
             // 本质上还是 插入排序的优化版本
             // 初始版本 插入排序是挨着牌的跑，交换对应的位置
             for (int i = h; i < array.length; i++) {
+                // 如果前面一位大 则不用比较
+                if(array[i] > array[i-h]){
+                    continue;
+                }
+
                 for(int j = i-h; j >= 0 && array[j] > array[j+h]; j--){
                     swap(array, j, j+h);
                 }
