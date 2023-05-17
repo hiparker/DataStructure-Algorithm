@@ -43,27 +43,24 @@ public class LinkedPartition {
             if(head.getValue() < base){
                 if(null == sH){
                     sH = head;
-                    sT = head;
                 }else {
                     sT.setNextNode(head);
-                    sT = head;
                 }
+                sT = head;
             }else if(head.getValue() == base){
                 if(null == eH){
                     eH = head;
-                    eT = head;
                 }else {
                     eT.setNextNode(head);
-                    eT = head;
                 }
+                eT = head;
             }else {
                 if(null == bH){
                     bH = head;
-                    bT = head;
                 }else {
                     bT.setNextNode(head);
-                    bT = head;
                 }
+                bT = head;
             }
             head = next;
         }
