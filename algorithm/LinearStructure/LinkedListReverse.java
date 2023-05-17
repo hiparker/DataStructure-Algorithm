@@ -1,6 +1,9 @@
 package algorithm.LinearStructure;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 反转链表
  *
@@ -13,24 +16,11 @@ package algorithm.LinearStructure;
 public class LinkedListReverse {
 
     public static void main(String[] args) {
-
-        LinkedNode node1 = new LinkedNode(1);
-        LinkedNode node2 = new LinkedNode(2);
-        LinkedNode node3 = new LinkedNode(3);
-        LinkedNode node4 = new LinkedNode(4);
-        node1.setNextNode(node2);
-        node2.setNextNode(node3);
-        node3.setNextNode(node4);
-
-        LinkedNode baseNode = node1;
+        LinkedNode baseNode = createLinkedList(4);
 
         System.out.println("原始顺序：");
         // 遍历结果
-        LinkedNode currNode = baseNode;
-        while (null != currNode){
-            System.out.print(currNode.getValue() + " ");
-            currNode = currNode.getNextNode();
-        }
+        printNode(baseNode);
 
         System.out.println();
         System.out.println("反转顺序：");
@@ -39,12 +29,7 @@ public class LinkedListReverse {
         // 循环反转
         baseNode = reverseWhile(baseNode);
         // 遍历结果
-        currNode = baseNode;
-        while (null != currNode){
-            System.out.print(currNode.getValue() + " ");
-            currNode = currNode.getNextNode();
-        }
-
+        printNode(baseNode);
     }
 
     /**
@@ -108,6 +93,34 @@ public class LinkedListReverse {
         return resultNode;
     }
 
+
+    /**
+     * 遍历链表
+     * @param node 头节点
+     */
+    private static void printNode(LinkedNode node){
+        while (node != null){
+            System.out.print(node.getValue() + " ");
+            node = node.getNextNode();
+        }
+        System.out.println();
+    }
+
+    /**
+     * 创建链表
+     * @param length 长度
+     * @return LinkedNode 头节点
+     */
+    private static LinkedNode createLinkedList(int length){
+        List<LinkedNode> list = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            list.add(new LinkedNode(i+1));
+        }
+        for (int i = list.size() - 1; i > 0; i--) {
+            list.get(i-1).setNextNode(list.get(i));
+        }
+        return list.get(0);
+    }
 
     /**
      * 链表Node
