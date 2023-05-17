@@ -170,21 +170,6 @@ public class LinkedPalindrome {
         System.out.println();
     }
 
-    /**
-     * 创建链表
-     * @param length 长度
-     * @return LinkedNode 头节点
-     */
-    private static LinkedNode createLinkedList(int length){
-        List<LinkedNode> list = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            list.add(new LinkedNode(i+1));
-        }
-        for (int i = list.size() - 1; i > 0; i--) {
-            list.get(i-1).setNextNode(list.get(i));
-        }
-        return list.get(0);
-    }
 
     /**
      * 链表Node
