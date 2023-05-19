@@ -1,8 +1,6 @@
 package algorithm.LinearStructure;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 链表 Randome随机节点 克隆
@@ -27,11 +25,20 @@ import java.util.Random;
 public class LinkedRandomNodeClone {
 
     public static void main(String[] args) {
-        LinkedNode headNode = createRandomLinkedList(20);
+        LinkedNode headNode = createRandomLinkedList(5);
 
         // 遍历节点
         printNode(headNode);
 
+        System.out.println("Hash表处理：");
+        LinkedNode linkedNode1 = cloneLink1(headNode);
+        // 遍历节点
+        printNode(linkedNode1);
+
+        System.out.println("合并处理：");
+        LinkedNode linkedNode2 = cloneLink2(headNode);
+        // 遍历节点
+        printNode(linkedNode2);
     }
 
     /**
@@ -40,8 +47,26 @@ public class LinkedRandomNodeClone {
      *
      * @return LinkedNode
      */
-    public LinkedNode cloneLink1(LinkedNode head){
-        return null;
+    public static LinkedNode cloneLink1(LinkedNode head){
+        Map<Integer, LinkedNode> hashNewNodeMap = new HashMap<>();
+        LinkedNode curr = head;
+        while (curr != null){
+            hashNewNodeMap.put(curr.hashCode(), new LinkedNode(curr.getValue()));
+            curr = curr.getNextNode();
+        }
+
+        curr = head;
+        while (curr != null){
+            if(null != curr.getNextNode()){
+                hashNewNodeMap.get(curr.hashCode()).setNextNode(hashNewNodeMap.get(curr.getNextNode().hashCode()));
+            }
+
+            if(null != curr.getRandNode()){
+                hashNewNodeMap.get(curr.hashCode()).setRandNode(hashNewNodeMap.get(curr.getRandNode().hashCode()));
+            }
+            curr = curr.getNextNode();
+        }
+        return hashNewNodeMap.get(head.hashCode());
     }
 
 
@@ -51,8 +76,50 @@ public class LinkedRandomNodeClone {
      *
      * @return LinkedNode
      */
-    public LinkedNode cloneLink2(LinkedNode head){
-        return null;
+    public static LinkedNode cloneLink2(LinkedNode head){
+        if(null == head){
+            return null;
+        }
+
+        // 复制节点 并入主链表
+        // a -> b -> c -> d
+        // a -> a' -> b -> b' -> c -> c' -> d -> d'
+        LinkedNode curr = head;
+        while (curr != null){
+            LinkedNode nextNode = curr.getNextNode();
+
+            LinkedNode currCopyNode = new LinkedNode(curr.getValue());
+
+            currCopyNode.setNextNode(nextNode);
+            curr.setNextNode(currCopyNode);
+            curr = nextNode;
+        }
+
+        LinkedNode newHead = head.getNextNode();
+
+        // 处理 新节点 rand
+        curr = head;
+        while (curr != null){
+            curr.getNextNode().setRandNode(curr.getRandNode().getNextNode());
+            curr = curr.getNextNode().getNextNode();
+        }
+
+        // 拆散长链表
+        curr = head;
+        while (curr != null){
+            LinkedNode nextNode = curr.getNextNode().getNextNode();
+
+            // 设置新节点
+            if(null != nextNode){
+                curr.getNextNode().setNextNode(nextNode.getNextNode());
+            }
+
+            curr.setNextNode(nextNode);
+
+            curr = nextNode;
+        }
+
+        return newHead;
     }
 
     /**
@@ -61,7 +128,11 @@ public class LinkedRandomNodeClone {
      */
     private static void printNode(LinkedNode node){
         while (node != null){
-            System.out.print(node.getValue() + " ");
+            String rv = "";
+            if(node.getRandNode() != null){
+                rv = node.getRandNode().getValue()+"";
+            }
+            System.out.print(node.getValue()+"----"+rv + " ");
             node = node.getNextNode();
         }
         System.out.println();
@@ -80,6 +151,11 @@ public class LinkedRandomNodeClone {
         }
         for (int i = list.size() - 1; i > 0; i--) {
             list.get(i-1).setNextNode(list.get(i));
+        }
+        for (int i = 0; i < length; i++) {
+            // 设置随机 rand 指针
+            int j = random.nextInt(length);
+            list.get(i).setRandNode(list.get(j));
         }
         return list.get(0);
     }
@@ -135,5 +211,6 @@ public class LinkedRandomNodeClone {
         public void setRandNode(LinkedNode randNode) {
             this.randNode = randNode;
         }
+
     }
 }
