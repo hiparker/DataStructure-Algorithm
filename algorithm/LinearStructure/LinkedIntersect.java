@@ -191,7 +191,7 @@ public class LinkedIntersect {
     }
 
     /**
-     * 克隆链表
+     * 获取 回环链表 第一个入环节点
      * hash表实现
      *
      * @return LinkedNode
