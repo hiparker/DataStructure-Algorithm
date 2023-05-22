@@ -57,7 +57,10 @@ public class BinaryInsertionSort extends AbstractSortBase{
             // 二分查找
             int low = 0, high = i - 1, mid;
             while (high >= low){
-                mid = (low + high) / 2;
+                // L 10亿 R8亿 可能会溢出
+                // mid = (low + high) / 2;
+                // mid = low + (high - low) / 2;
+                mid = low + ((high - low) >> 1);
                 if(array[mid] < array[i]){
                     low = mid + 1;
                 }else{

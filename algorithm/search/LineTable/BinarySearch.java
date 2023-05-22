@@ -61,7 +61,8 @@ public class BinarySearch {
                 tail = center - 1;
             }
             // 更新中心位置
-            center = (head + tail) / 2;
+            //center = (head + tail) / 2;
+            center = tail + ((head - tail) >> 1);
         }
         return false;
     }
