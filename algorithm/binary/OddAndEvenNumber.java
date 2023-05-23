@@ -1,7 +1,5 @@
 package algorithm.binary;
 
-import java.util.Random;
-
 /**
  * 二进制 求奇数偶数
  *
