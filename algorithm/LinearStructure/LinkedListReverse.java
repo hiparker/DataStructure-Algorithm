@@ -3,6 +3,7 @@ package algorithm.LinearStructure;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 反转链表
@@ -17,6 +18,7 @@ public class LinkedListReverse {
 
     public static void main(String[] args) {
         LinkedNode baseNode = createLinkedList(4);
+        DoubleLinkedNode baseDoubleNode = createDoubleLinkedList(4);
 
         System.out.println("原始顺序：");
         // 遍历结果
@@ -27,9 +29,28 @@ public class LinkedListReverse {
         // 递归反转
         //baseNode = reverseRecursion(baseNode);
         // 循环反转
-        baseNode = reverseWhile(baseNode);
+        LinkedNode reverse1 = reverseWhile(baseNode);
         // 遍历结果
-        printNode(baseNode);
+        printNode(reverse1);
+        reverseWhile(reverse1);
+
+        System.out.println("-----------------");
+        System.out.println("简化版本反转：");
+        LinkedNode reverse2 = reverseWhileSimple(baseNode);
+        // 遍历结果
+        printNode(reverse2);
+
+        System.out.println();
+        System.out.println("双向链表原始顺序：");
+        // 遍历结果
+        printNode(baseDoubleNode);
+
+        System.out.println();
+        System.out.println("双向链表反转顺序：");
+        DoubleLinkedNode doubleLinkedNode1 = doubleReverseWhileSimple(baseDoubleNode);
+        // 遍历结果
+        printNode(doubleLinkedNode1);
+
     }
 
     /**
@@ -95,6 +116,51 @@ public class LinkedListReverse {
 
 
     /**
+     * 循环反转（简化版本）
+     *
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @return LinkedNode
+     */
+    public static LinkedNode reverseWhileSimple(LinkedNode head){
+        LinkedNode prev = null;
+        LinkedNode next = null;
+        while (null != head){
+            next = head.nextNode;
+
+            head.nextNode = prev;
+
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+
+
+    /**
+     * 循环反转 (双向)（简化版本）
+     *
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(1)
+     * @return LinkedNode
+     */
+    public static DoubleLinkedNode doubleReverseWhileSimple(DoubleLinkedNode head){
+        DoubleLinkedNode prev = null;
+        DoubleLinkedNode next = null;
+        while (null != head){
+            next = head.next;
+
+            head.next = prev;
+            head.prev = next;
+
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+
+
+    /**
      * 遍历链表
      * @param node 头节点
      */
@@ -105,6 +171,29 @@ public class LinkedListReverse {
         }
         System.out.println();
     }
+
+    /**
+     * 遍历链表
+     * @param node 头节点
+     */
+    private static void printNode(DoubleLinkedNode node){
+        DoubleLinkedNode a = node;
+        DoubleLinkedNode b = node;
+        while (a != null){
+            System.out.print(a.value + " ");
+            if(null == a.next){
+                b = a;
+            }
+            a = a.next;
+        }
+        System.out.println();
+        while (b != null){
+            System.out.print(b.value + " ");
+            b = b.prev;
+        }
+        System.out.println();
+    }
+
 
     /**
      * 创建链表
@@ -121,6 +210,24 @@ public class LinkedListReverse {
         }
         return list.get(0);
     }
+
+    /**
+     * 创建链表
+     * @param length 长度
+     * @return LinkedNode 头节点
+     */
+    private static DoubleLinkedNode createDoubleLinkedList(int length){
+        List<DoubleLinkedNode> list = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            list.add(new DoubleLinkedNode(i+1));
+        }
+        for (int i = list.size() - 1; i > 0; i--) {
+            list.get(i-1).next = list.get(i);
+            list.get(i).prev = list.get(i-1);
+        }
+        return list.get(0);
+    }
+
 
     /**
      * 链表Node
@@ -146,6 +253,23 @@ public class LinkedListReverse {
         public void setNextNode(LinkedNode nextNode) {
             this.nextNode = nextNode;
         }
+    }
+
+    /**
+     * 双向链表Node
+     */
+    private static class DoubleLinkedNode {
+
+        private final Integer value;
+
+        private DoubleLinkedNode prev;
+
+        private DoubleLinkedNode next;
+
+        public DoubleLinkedNode(Integer value){
+            this.value = value;
+        }
+
     }
 
 }
