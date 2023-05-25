@@ -69,7 +69,7 @@ public class HeapSort extends AbstractSortBase{
      */
     private void heapIfy(int[] array, int up, int i){
         //int leftChildIndex = 2*i+1;
-        int leftChildIndex = (i << 1) | 1;
+        int leftChildIndex = (i << 1) + 1;
         while (leftChildIndex < up){
             // 获取较大的一个孩子的下标
             int largest = leftChildIndex+1 < up && array[leftChildIndex+1] > array[leftChildIndex]
@@ -83,7 +83,7 @@ public class HeapSort extends AbstractSortBase{
             // 交换位置
             swap(array, i, largest);
             i = largest;
-            leftChildIndex = 2*i+1;
+            leftChildIndex = (i << 1) + 1;
         }
     }
 
