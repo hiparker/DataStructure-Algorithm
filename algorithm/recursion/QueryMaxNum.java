@@ -17,6 +17,14 @@ public class QueryMaxNum {
         System.out.println(i);
     }
 
+    /**
+     * T(N) = a * T(n/b) + O(Nd)
+     * T(N) = 2 * T(n/2) + O(N0)
+     * @param array
+     * @param l
+     * @param r
+     * @return
+     */
     private static int maxNum(int[] array, int l, int r){
         if(l == r){
             return array[l];
