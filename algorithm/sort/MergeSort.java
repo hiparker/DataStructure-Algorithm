@@ -65,8 +65,8 @@ public class MergeSort extends AbstractSortBase{
         }
 
         // 覆盖现有数组
-        for(int j = low, k = 0; j <= high; j++, k++){
-            array[j] = tempArray[k];
+        for (int j = 0; j < tempArray.length; j++) {
+            array[low+j] = tempArray[j];
         }
     }
 }
