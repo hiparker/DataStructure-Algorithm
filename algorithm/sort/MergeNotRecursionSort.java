@@ -15,7 +15,7 @@ public class MergeNotRecursionSort extends AbstractSortBase{
     }
 
     /**
-     * O(n)*logn
+     * O(n*logn)
      * @param array
      * @return
      */
