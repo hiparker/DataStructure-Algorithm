@@ -14,6 +14,11 @@ public class MergeNotRecursionSort extends AbstractSortBase{
         mergeSort.check(randomArray);
     }
 
+    /**
+     * O(n)*logn
+     * @param array
+     * @return
+     */
     @Override
     public int[] sort(int[] array) {
         // 合并长度 mergeSize*2 等于一次递归处理的总长度

@@ -14,6 +14,11 @@ public class MergeSort extends AbstractSortBase{
         mergeSort.check(randomArray);
     }
 
+    /**
+     * O(n)*logn
+     * @param array
+     * @return
+     */
     @Override
     public int[] sort(int[] array) {
         // 归并排序
