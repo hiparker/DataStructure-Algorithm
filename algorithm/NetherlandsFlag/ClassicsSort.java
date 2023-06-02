@@ -23,8 +23,7 @@ public class ClassicsSort extends AbstractNetherlandsFlag {
         int i = 0;
         while (i < more){
             if (array[i] < num){
-                swap(array, ++less, i);
-                i++;
+                swap(array, ++less, i++);
                 continue;
             }else if(array[i] > num){
                 swap(array, --more, i);
