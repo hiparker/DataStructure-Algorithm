@@ -154,7 +154,7 @@ public class TrieTree {
         private int end;
 
         /** next 节点集合 */
-        private Map<Integer, Node> nextMap;
+        private final Map<Integer, Node> nextMap;
 
         public Node(){
             this.pass = 0;
