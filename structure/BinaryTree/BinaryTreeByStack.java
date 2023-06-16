@@ -80,17 +80,18 @@ public class BinaryTreeByStack {
         }
 
 
+        // 如有左压入左 如有右压入右
         LeafNode p = node;
         Stack<LeafNode> stack = new Stack<>();
         while (null != p || !stack.isEmpty()){
             if(null != p){
                 stack.push(p);
                 p = p.getlChild();
-            }else {
-                LeafNode pop = stack.pop();
-                System.out.println(pop.getData());
-                p = pop.getrChild();
+                continue;
             }
+            LeafNode pop = stack.pop();
+            System.out.println(pop.getData());
+            p = pop.getrChild();
         }
     }
 
@@ -108,18 +109,18 @@ public class BinaryTreeByStack {
         Stack<LeafNode> stack = new Stack<>();
         while (null != p || !stack.isEmpty()){
             // 循环到 左子树底
-            while (null != p){
+            if(null != p){
                 stack.push(p);
                 p = p.getlChild();
+                continue;
             }
-
             LeafNode top = stack.peek();
             // 如果当前节点没有右节点 则默认当前节点 已经为底节点
             // 如果当前节点的右节点 等于上一次出栈节点 则认为当前节点认为已经遍历完毕 直接出栈
             if(null == top.getrChild() || top.getrChild() == prev){
                 LeafNode pop = stack.pop();
                 System.out.println(pop.getData());
-                prev = top;
+                prev = pop;
             }else {
                 p = top.getrChild();
             }
