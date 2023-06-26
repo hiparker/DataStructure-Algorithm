@@ -11,10 +11,10 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author 周鹏程
  * @date 2022-10-31 7:33 PM
  **/
-public class GetBinaryTreeFloorMaxCount {
+public class GetBinaryTreeLevelMaxCount {
 
     public static void main(String[] args) {
-        GetBinaryTreeFloorMaxCount bt = new GetBinaryTreeFloorMaxCount();
+        GetBinaryTreeLevelMaxCount bt = new GetBinaryTreeLevelMaxCount();
 
         //        2
         //   1          5
@@ -141,7 +141,7 @@ public class GetBinaryTreeFloorMaxCount {
     }
 
 
-    public GetBinaryTreeFloorMaxCount push(int data){
+    public GetBinaryTreeLevelMaxCount push(int data){
         LeafNode leafNode = new LeafNode();
         leafNode.setData(data);
 
