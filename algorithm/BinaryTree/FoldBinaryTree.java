@@ -10,6 +10,9 @@ package algorithm.BinaryTree;
  *
  * 给定一个输入参数N, 代表纸条都从下边向上对折N次. 请从上到下打印所有折痕的方向
  * 例如:  N=1时, 打印 down, N=2时, 打印 down down up
+ *
+ * @author 周鹏程
+ * @date 2023-06-30 16:53:43
  */
 public class FoldBinaryTree {
 
