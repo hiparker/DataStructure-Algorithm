@@ -104,6 +104,9 @@ public class IsCBTBinaryTree extends AbstractBinaryTree{
         }
     }
     public boolean isCBT2(Node head){
+        if(head == null){
+            return true;
+        }
         Info info = doIsCBT(head);
         return info.isCBT;
     }
