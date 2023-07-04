@@ -37,19 +37,17 @@ public class Leecode04 {
             return;
         }
 
-        int less = -1;
-        int more = nums.length-1;
-        int i = 0;
-        while (less < more){
-            if(nums[i] == 0){
-                int endIndex = more--;
-                int tmp = nums[i];
-                nums[i] = nums[endIndex];
+        int l = 0;
+        int r = nums.length-1;
+        while (l < r){
+            if(nums[l] == 0){
+                int endIndex = r--;
+                int tmp = nums[l];
+                nums[l] = nums[endIndex];
                 nums[endIndex] = tmp;
                 continue;
             }
-            i++;
-            less++;
+            l++;
         }
     }
 
