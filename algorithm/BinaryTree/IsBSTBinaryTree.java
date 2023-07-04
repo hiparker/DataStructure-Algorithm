@@ -96,16 +96,16 @@ public class IsBSTBinaryTree extends AbstractBinaryTree{
         }
     }
     public boolean isBST2(Node head){
-        Info info = doIsFull(head);
+        Info info = doIsBST(head);
         return info.isBST;
     }
-    private Info doIsFull(Node head){
+    private Info doIsBST(Node head){
         if(head == null){
             return null;
         }
 
-        Info leftInfo = doIsFull(head.left);
-        Info rightInfo = doIsFull(head.right);
+        Info leftInfo = doIsBST(head.left);
+        Info rightInfo = doIsBST(head.right);
 
         int min = head.data;
         int max = head.data;
