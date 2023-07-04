@@ -39,6 +39,9 @@ public class IsBalanceBinaryTree extends AbstractBinaryTree {
     }
 
     public static boolean isBalance(Node h){
+        if(h == null){
+            return true;
+        }
         return doIsBalance(h).isBalanceTree;
     }
 
