@@ -23,8 +23,10 @@ package algorithm.leecode.onehundred;
 public class Leecode04 {
 
     public static void main(String[] args) {
-        int[] nums = {45192,0,0,-52359,-99225,-75991,0,-15155,27382,59818,0,-30645,-17025,81209,887,64648};
+        int[] nums = {45192,0,0,-52359,0,-75991,0,-15155,27382,59818,0,-30645,-17025,81209,887,64648};
+        long l = System.currentTimeMillis();
         moveZeroes(nums);
+        System.out.println("耗时：" + (System.currentTimeMillis()-l));
         for (int num : nums) {
             System.out.println(num);
         }
@@ -35,17 +37,38 @@ public class Leecode04 {
             return;
         }
 
-        int index = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if(nums[i] != 0){
-                nums[index++] = nums[i];
+        int less = -1;
+        int more = nums.length-1;
+        int i = 0;
+        while (less < more){
+            if(nums[i] == 0){
+                int endIndex = more--;
+                int tmp = nums[i];
+                nums[i] = nums[endIndex];
+                nums[endIndex] = tmp;
+                continue;
             }
-        }
-
-        for (int i = index; i < nums.length; i++) {
-            nums[index++] = 0;
+            i++;
+            less++;
         }
     }
+
+//    public static void moveZeroes(int[] nums) {
+//        if (nums == null || nums.length <= 1) {
+//            return;
+//        }
+//
+//        int index = 0;
+//        for (int i = 0; i < nums.length; i++) {
+//            if(nums[i] != 0){
+//                nums[index++] = nums[i];
+//            }
+//        }
+//
+//        for (int i = index; i < nums.length; i++) {
+//            nums[index++] = 0;
+//        }
+//    }
 
 //    public static void moveZeroes(int[] nums) {
 //        if (nums == null || nums.length <= 1) {
