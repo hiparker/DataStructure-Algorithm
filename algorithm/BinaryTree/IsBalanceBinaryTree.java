@@ -9,7 +9,7 @@ package algorithm.BinaryTree;
  * @author 周鹏程
  * @date 2023-06-30 5:51 PM
  **/
-public class JudgmentBalanceBinaryTree {
+public class IsBalanceBinaryTree extends AbstractBinaryTree {
 
 
     public static void main(String[] args) {
@@ -32,12 +32,14 @@ public class JudgmentBalanceBinaryTree {
         r11.left = r111;
 
 
-        boolean b = judgmentBalance(head);
+        printBinaryTree(head);
+        boolean b = isBalance(head);
+        System.out.println("是否是平衡二叉树：");
         System.out.println(b);
     }
 
-    public static boolean judgmentBalance(Node h){
-        return doJudgmentBalance(h).isBalanceTree;
+    public static boolean isBalance(Node h){
+        return doIsBalance(h).isBalanceTree;
     }
 
     private static class Info{
@@ -52,7 +54,7 @@ public class JudgmentBalanceBinaryTree {
         }
     }
 
-    private static Info doJudgmentBalance(Node h){
+    private static Info doIsBalance(Node h){
         // 我能和子树要到什么属性
         // 1. 你是不是一棵平衡二叉树
         // 2. 你当前的节点高度是多少
@@ -60,8 +62,8 @@ public class JudgmentBalanceBinaryTree {
             return new Info(true, 0);
         }
 
-        Info leftInfo = doJudgmentBalance(h.left);
-        Info rightInfo = doJudgmentBalance(h.right);
+        Info leftInfo = doIsBalance(h.left);
+        Info rightInfo = doIsBalance(h.right);
 
         // 当前节点的高度
         int height = Math.max(leftInfo.height, rightInfo.height)+1;
@@ -70,19 +72,5 @@ public class JudgmentBalanceBinaryTree {
         // 当前节点是否是平衡二叉树
         return new Info(isBalanceTree, height);
     }
-
-    private static class Node {
-
-        int value;
-
-        Node left;
-
-        Node right;
-
-        public Node(int value) {
-            this.value = value;
-        }
-    }
-
 
 }
