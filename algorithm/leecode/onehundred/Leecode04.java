@@ -37,36 +37,17 @@ public class Leecode04 {
             return;
         }
 
-        int l = 0;
-        int r = nums.length-1;
-        while (l < r){
-            if(nums[l] == 0){
-                int endIndex = r--;
-                int tmp = nums[l];
-                nums[l] = nums[endIndex];
-                nums[endIndex] = tmp;
-                continue;
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] != 0){
+                nums[index++] = nums[i];
             }
-            l++;
+        }
+
+        for (int i = index; i < nums.length; i++) {
+            nums[index++] = 0;
         }
     }
-
-//    public static void moveZeroes(int[] nums) {
-//        if (nums == null || nums.length <= 1) {
-//            return;
-//        }
-//
-//        int index = 0;
-//        for (int i = 0; i < nums.length; i++) {
-//            if(nums[i] != 0){
-//                nums[index++] = nums[i];
-//            }
-//        }
-//
-//        for (int i = index; i < nums.length; i++) {
-//            nums[index++] = 0;
-//        }
-//    }
 
 //    public static void moveZeroes(int[] nums) {
 //        if (nums == null || nums.length <= 1) {
