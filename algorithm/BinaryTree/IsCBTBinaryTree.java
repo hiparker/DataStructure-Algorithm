@@ -10,10 +10,10 @@ import java.util.LinkedList;
  * @author 周鹏程
  * @date 2023-07-04 2:25 PM
  **/
-public class IsCBTByBinaryTree extends AbstractBinaryTree{
+public class IsCBTBinaryTree extends AbstractBinaryTree{
 
     public static void main(String[] args) {
-        IsCBTByBinaryTree isCBTByBinaryTree = new IsCBTByBinaryTree();
+        IsCBTBinaryTree isCBTBinaryTree = new IsCBTBinaryTree();
 
         boolean isCBT = true;
         int maxCount = 100;
@@ -23,7 +23,7 @@ public class IsCBTByBinaryTree extends AbstractBinaryTree{
             if(null == node){
                 continue;
             }
-            if(isCBTByBinaryTree.isCBT1(node) != isCBTByBinaryTree.isCBT2(node)){
+            if(isCBTBinaryTree.isCBT1(node) != isCBTBinaryTree.isCBT2(node)){
                 isCBT = false;
                 break;
             }
