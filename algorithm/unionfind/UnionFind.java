@@ -95,12 +95,12 @@ public class UnionFind {
             Integer aSize = size.get(parentA);
             Integer bSize = size.get(parentB);
 
-            V bigV = aSize > bSize ? a : b;
-            V smallV = bigV == b ? a : b;
+            V bigParentV = aSize > bSize ? parentA : parentB;
+            V smallParentV = bigParentV == parentB ? parentA : parentB;
 
-            parent.put(smallV, bigV);
-            size.put(bigV, aSize+bSize);
-            size.remove(smallV);
+            parent.put(smallParentV, bigParentV);
+            size.put(bigParentV, aSize+bSize);
+            size.remove(smallParentV);
         }
 
 
