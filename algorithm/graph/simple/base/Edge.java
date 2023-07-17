@@ -14,7 +14,7 @@ public class Edge {
     /** 来至于 */
     public Node from;
 
-    /** 去哪儿 */
+    /** 要去哪儿 */
     public Node to;
 
     public Edge(int weight, Node from, Node to) {
