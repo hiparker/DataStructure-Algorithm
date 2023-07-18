@@ -1,8 +1,6 @@
 package structure.LinearStructure;
 
 
-import com.sun.tools.javac.util.Assert;
-
 /**
  * 单向链表
  *
@@ -47,8 +45,6 @@ public class MySingleLinkedList<T> {
      * @param index 位序
      */
     public void insert(T t, int index){
-        Assert.check(index >= 0 && index <= length);
-
         // 确认为尾节点
         if(length == index){
             linkTail(t);

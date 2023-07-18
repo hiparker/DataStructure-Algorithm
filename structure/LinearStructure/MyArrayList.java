@@ -1,8 +1,6 @@
 package structure.LinearStructure;
 
 
-import com.sun.tools.javac.util.Assert;
-
 import java.util.Arrays;
 
 /**
@@ -51,8 +49,6 @@ public class MyArrayList<T> {
     public void insert(T t, int index){
         // 校验是否需要自动扩容 阔多大
         ensureCapacityInternal();
-
-        Assert.check(index >= 0 && index <= length);
 
         // 最后一个 直接调用尾节点插入
         if(length == index){
