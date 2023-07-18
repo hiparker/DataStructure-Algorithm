@@ -1,8 +1,8 @@
 package algorithm.graph.simple;
 
-import algorithm.graph.simple.base.Edge;
-import algorithm.graph.simple.base.Graph;
-import algorithm.graph.simple.base.Node;
+import structure.Graph.Edge;
+import structure.Graph.Graph;
+import structure.Graph.Node;
 
 /**
  * n*3 矩阵转化器 -> 图
