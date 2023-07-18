@@ -1,7 +1,5 @@
 package algorithm.graph.simple.base;
 
-import com.sun.javafx.geom.Edge;
-
 import java.util.ArrayList;
 
 /**
