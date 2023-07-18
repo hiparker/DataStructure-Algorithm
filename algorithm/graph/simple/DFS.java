@@ -1,7 +1,7 @@
 package algorithm.graph.simple;
 
-import algorithm.graph.simple.base.Graph;
-import algorithm.graph.simple.base.Node;
+import structure.Graph.Graph;
+import structure.Graph.Node;
 
 import java.util.HashSet;
 import java.util.Stack;
