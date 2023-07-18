@@ -1,4 +1,4 @@
-package algorithm.graph.simple.base;
+package structure.Graph;
 
 import java.util.ArrayList;
 
