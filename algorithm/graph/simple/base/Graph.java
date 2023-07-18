@@ -16,8 +16,8 @@ public class Graph {
     /** 所有边 */
     public HashSet<Edge> edges;
 
-    public Graph(HashMap<Integer, Node> nodes, HashSet<Edge> edges) {
-        this.nodes = nodes;
-        this.edges = edges;
+    public Graph() {
+        this.nodes = new HashMap<>();
+        this.edges = new HashSet<>();
     }
 }

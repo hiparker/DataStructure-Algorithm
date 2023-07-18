@@ -25,11 +25,11 @@ public class Node {
     /** 边 */
     public ArrayList<Edge> edges;
 
-    public Node(int value, int in, int out, ArrayList<Node> nexts, ArrayList<Edge> edges) {
+    public Node(int value) {
         this.value = value;
-        this.in = in;
-        this.out = out;
-        this.nexts = nexts;
-        this.edges = edges;
+        in = 0;
+        out = 0;
+        nexts = new ArrayList<>();
+        edges = new ArrayList<>();
     }
 }
