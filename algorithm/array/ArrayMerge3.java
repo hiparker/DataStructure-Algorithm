@@ -12,15 +12,10 @@ public class ArrayMerge3 {
 
 		int[][] lists = {{1,4,5},{1,3,4},{2,6}};
 
-		int parentLen = 0;
 		int len = 0;
-		for (int[] ints : lists) {
-			parentLen++;
-			len += ints.length;
-		}
-
-		int[] indexArray = new int[parentLen];
-		for (int i = 0; i < parentLen; i++) {
+		int[] indexArray = new int[lists.length];
+		for (int i = 0; i < lists.length; i++) {
+			len += lists[i].length;
 			indexArray[i] = 0;
 		}
 
