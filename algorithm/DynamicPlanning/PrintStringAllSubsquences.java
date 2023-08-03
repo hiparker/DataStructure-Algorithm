@@ -13,17 +13,17 @@ public class PrintStringAllSubsquences {
 
 	public static void main(String[] args) {
 		String str = "abcd";
-		printAllSubsquences(str);
-	}
-
-	public static void printAllSubsquences(String str){
-		char[] strChars = str.toCharArray();
-		List<String> ans = new ArrayList<>();
-		process(strChars, 0, ans, "");
-
+		List<String> ans = printAllSubsquences(str);
 		for (String an : ans) {
 			System.out.println(an);
 		}
+	}
+
+	public static List<String> printAllSubsquences(String str){
+		char[] strChars = str.toCharArray();
+		List<String> ans = new ArrayList<>();
+		process(strChars, 0, ans, "");
+		return ans;
 	}
 
 	private static void process(char[] strChars, int index, List<String> ans, String path){
