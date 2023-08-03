@@ -13,19 +13,26 @@ import java.util.List;
 public class FullPermutation {
 
     public static void main(String[] args) {
-        List<String> abc = permutation("abc");
-        for (String s : abc) {
+        List<String> abc1 = permutation1("abc");
+        for (String s : abc1) {
+            System.out.println(s);
+        }
+
+        System.out.println("----------------------------");
+
+        List<String> abc2 = permutation2("abc");
+        for (String s : abc2) {
             System.out.println(s);
         }
     }
 
-    public static List<String> permutation(String str){
+    public static List<String> permutation1(String str){
         List<String> array = new ArrayList<>();
-        process(str, new HashSet<>(), "", array);
+        process1(str, new HashSet<>(), "", array);
         return array;
     }
 
-    private static void process(String str, HashSet<Integer> use, String path, List<String> array) {
+    private static void process1(String str, HashSet<Integer> use, String path, List<String> array) {
         if(use.size() == str.length()){
             array.add(path);
             return;
@@ -34,10 +41,35 @@ public class FullPermutation {
         for (int i = 0; i < str.length(); i++) {
             if(!use.contains(i)){
                 use.add(i);
-                process(str,use,path + str.charAt(i),array);
+                process1(str,use,path + str.charAt(i),array);
                 use.remove(i);
             }
         }
     }
 
+
+    public static List<String> permutation2(String str){
+        List<String> array = new ArrayList<>();
+        process2(str.toCharArray(), 0, array);
+        return array;
+    }
+
+
+    private static void process2(char[] str, int i, List<String> array) {
+        if(i == str.length){
+            array.add(String.valueOf(str));
+        }
+
+        for (int j = i; j < str.length;j++){
+            swap(str, i, j);
+            process2(str, i+1, array);
+            swap(str, i, j);
+        }
+    }
+
+    private static void swap(char[] str, int i, int j){
+        char tmp = str[i];
+        str[i] = str[j];
+        str[j] = tmp;
+    }
 }
