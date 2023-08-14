@@ -23,6 +23,9 @@ public class Knapspack {
 
 		int val = maxValue(weights, values, bag);
 		System.out.println(val);
+		val = dpWay(weights, values, bag);
+		System.out.println(val);
+
 	}
 
 	public static int maxValue(int[] w, int[] v, int bag){
@@ -36,7 +39,7 @@ public class Knapspack {
 	}
 
 	private static int process(int[] w, int[] v, int i, int rest) {
-		if(rest <= 0){
+		if(rest < 0){
 			return Integer.MIN_VALUE;
 		}
 
@@ -50,6 +53,39 @@ public class Knapspack {
 			p2 = v[i] + p2;
 		}
 		return Math.max(p1, p2);
+	}
+
+	/**
+	 * 暴力递归改动态规划
+	 * @param w w
+	 * @param v v
+	 * @param bag bag
+	 * @return int
+	 */
+	public static int dpWay(int[] w, int[] v, int bag){
+		if(w == null || w.length == 0 ||
+				v == null || v.length == 0 || bag == 0){
+			return 0;
+		}
+
+		int n = w.length;
+		int[][] dp = new int[n+1][bag+1];
+
+		// 默认二维表 dp[n+1][0 ~ bag+1] 都是0
+
+		// ..
+		for (int index = n - 1; index >= 0; index--) {
+			for (int rest = 0; rest <= bag; rest++) {
+				// dp[index][rest] = ?
+				int p1 = dp[index+1][rest];
+				int p2 = -1;
+				if(rest - w[index] >= 0){
+					p2 = v[index] + dp[index + 1][rest - w[index]];
+				}
+				dp[index][rest] = Math.max(p1, p2);
+			}
+		}
+		return dp[0][bag];
 	}
 
 }
